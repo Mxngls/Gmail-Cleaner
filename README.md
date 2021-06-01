@@ -31,7 +31,7 @@ Just click on the big green button on upper right corner or run:
 
 ## Usage
 First copy the created JSON-file into the source folder.
-Second start the script with running:
+Then switch to the src folder and start the script with:
 
 ```python3 gmailCleaner.py```
 
