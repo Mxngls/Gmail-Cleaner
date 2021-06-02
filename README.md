@@ -30,8 +30,8 @@ Just click on the big green button on upper right corner or run:
 ```git clone https://github.com/mxngls/Gmail-Cleaner.git ```
 
 ## Usage
-First copy the created JSON-file into the source folder.
-Then switch to the src folder and start the script with:
+First copy the JSON-file (credentials.json) that is created when you enable the Gmail API into the source folder.
+Then switch to the src folder and run the script with:
 
 ```python3 gmailCleaner.py```
 
