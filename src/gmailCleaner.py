@@ -31,18 +31,21 @@ def main():
 				1. Show the most common senders
 				'''
 				if len(gmail.users) == 0:
-					batched = gmail.batch_get(gmail.list_messages('me'))
+					gmail.batch_get(gmail.list_messages('me'))
+					gmail.users = Counter(gmail.users).items()
+				gmail.users = [user for user in sorted(gmail.users, key = lambda user: user[1], reverse=True)]
+                		user_choice_users = int(input('How much senders do you want to get displayed?' + '\n'))
 
-					users = [user for user in sorted((gmail.users).items(), key = lambda user: user[1], reverse=True)]
-					user_choice_users = int(input('How much senders do you want to get displayed?' + '\n'))
+                		print('You have:')
 
-				print('You have:')
-
-				for i in range(0, user_choice_users):
-	   				if re.search("(?<=<)(.*)(?=>)" , users[i][0]).group() is None:
-	   					continue
-	   				gmail.total_from_users += int(users[i][1])
-	   				print(f'- {users[i][1]} e-mails from {(re.search("(?<=<)(.*)(?=>)" , users[i][0]).group())}.')
+                		for i in range(0, user_choice_users):
+                    			match = re.search("(?<=<)(.*)(?=>)" , gmail.users[i][0]).group()
+                    			if match is None:
+                        			gmail.total_from_users += int(gmail.users[i][1])
+                        			print(f'- {gmail.users[i][1]} e-mails from {gmail.users[i][0]}.')
+					else:
+						gmail.total_from_users += int(gmail.users[i][1])
+						print(f'- {gmail.users[i][1]} e-mails from {match}.')
 
 				print(f'In total you have {gmail.total_messages} e-mails. {gmail.total_from_users} of these are from the {user_choice_users} users you specified.')
 
